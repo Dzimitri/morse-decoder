@@ -38,20 +38,31 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    let morseArr = expr.split(" ") //converting string to array
-
-    //decoding morse to array
-    for (let i = 0; i < morseArr.length; i++) {
-        if (morseArr[i] === "" && morseArr[i + 1] === "") {
-            morseArr.splice(i, 2, ' ')
-        }
-        if (morseArr[i] !== "") {
-            morseArr[i] = MORSE_CODE[morseArr[i]]
+    let i = 0;
+    let j = 10;
+    let sliceExpr = '';
+    let result = '';
+    let morze = '';
+    while (i < expr.length) {
+        sliceExpr = expr.slice(i, j)
+        if (sliceExpr == '**********') {
+            result += ' ';
         } else {
-            morseArr[i] = ' '
+            for (let index = 0; index < sliceExpr.length; index += 2) {
+                if (sliceExpr.slice(index, index + 2) == '11') {
+                    morze += '-';
+                }
+                if (sliceExpr.slice(index, index + 2) == '10') {
+                    morze += '.';
+                }
+            }
+            result += MORSE_TABLE[morze];
         }
+        morze = '';
+        i += 10;
+        j += 10;
     }
-    return morseArr.join('')
+    return result;
 }
 
 module.exports = {
