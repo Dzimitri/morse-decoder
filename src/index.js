@@ -44,7 +44,8 @@ function decode(expr) {
     for (let i = 0; i < morseArr.length; i++) {
         if (morseArr[i] === "" && morseArr[i + 1] === "") {
             morseArr.splice(i, 2, ' ')
-        } else if (morseArr[i] !== "") {
+        }
+        if (morseArr[i] !== "") {
             morseArr[i] = MORSE_CODE[morseArr[i]]
         } else {
             morseArr[i] = ' '
